@@ -15,6 +15,7 @@
     searchDelay: 300,
     minChars: 1,
     propertyToSearch: "name",
+		propertyForToken: "name",
     jsonContainer: null,
     contentType: "json",
     excludeCurrent: false,
@@ -43,7 +44,7 @@
     },
 
     tokenFormatter: function(item) {
-      var string = item[this.propertyToSearch];
+      var string = item[this.propertyForToken];
       return "<li><p>" + (this.enableHTML ? string : _escapeHTML(string)) + "</p></li>";
     },
 
