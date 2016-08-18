@@ -66,7 +66,9 @@
     onFreeTaggingAdd: null,
     onDelete: null,
     onReady: null,
-
+		onBlur: null,
+		onFocus: null,
+		
     // Other settings
     idPrefix: "token-input-",
 
@@ -262,6 +264,8 @@
                   show_dropdown_hint();
               }
               token_list.addClass($(input).data("settings").classes.focused);
+							if( $.isFunction($(input).data("settings").onFocus))
+								$(input).data("settings").onFocus.call(this)							
           })
           .blur(function () {
               hide_dropdown();
@@ -272,6 +276,8 @@
 
               $(this).val("");
               token_list.removeClass($(input).data("settings").classes.focused);
+							if( $.isFunction($(input).data("settings").onBlur))
+								$(input).data("settings").onBlur.call(this)
           })
           .bind("keyup keydown blur update", resize_input)
           .keydown(function (event) {
