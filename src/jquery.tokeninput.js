@@ -30,7 +30,7 @@
     noResultsText: "No results",
     searchingText: "Searching...",
     deleteText: "&#215;",
-    animateDropdown: true,
+    animateDropdown: true,		
     placeholder: null,
     theme: null,
     zindex: 999,
@@ -387,11 +387,15 @@
                     break;
               }
           });
-
+		
+			var placeholder = $(input).attr("placeholder") 
       // Keep reference for placeholder
       if (settings.placeholder) {
         input_box.attr("placeholder", settings.placeholder);
-      }
+				placeholder = settings.placeholder;
+      }else{
+				input_box.attr("placeholder", placeholder );
+			}
 
       // Keep a reference to the original input box
       var hiddenInput = $(input)
@@ -581,7 +585,7 @@
           // Get width left on the current line
           var width_left = token_list.width() - input_box.offset().left - token_list.offset().left;
           // Enter new content into resizer and resize input accordingly
-          input_resizer.html(_escapeHTML(input_val) || _escapeHTML(settings.placeholder));
+          input_resizer.html(_escapeHTML(input_val) || _escapeHTML(placeholder));
           // Get maximum width, minimum the size of input and maximum the widget's width
           input_box.width(Math.min(token_list.width(),
                                    Math.max(width_left, input_resizer.width() + 30)));
@@ -764,7 +768,7 @@
           // Remove this token from the saved list
           saved_tokens = saved_tokens.slice(0,index).concat(saved_tokens.slice(index+1));
           if (saved_tokens.length == 0) {
-              input_box.attr("placeholder", settings.placeholder)
+              input_box.attr("placeholder", placeholder)
           }
           if(index < selected_token_index) selected_token_index--;
 
